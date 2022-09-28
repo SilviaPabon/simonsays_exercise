@@ -1,28 +1,23 @@
 export class IndexView {
     constructor() {
+        //todo
         this._initiate = false;
         this.getElement = (selector) => document.querySelector(selector);
         this._display = this.getElement('.container');
     }
-    //TODO VER SI SE CAMBIA
     set display(display) {
         this._display = display;
     }
-    // Permite desplegar el original
     get display() {
         return this._display;
     }
     set initiate(initiate) {
         this._initiate = initiate;
     }
-    // Permite desplegar el original
     get initiate() {
         return this._initiate;
     }
-    // Manejar cuando se da clic en start
-    anotherInit() {
-        this.initiate = true;
-    }
+    //va pintando o iluminando los botones luego de start()
     pintar(orden) {
         const r = document.getElementById('red');
         const g = document.getElementById('green');
@@ -53,5 +48,18 @@ export class IndexView {
             }, 1000);
         }
         //TODO PONER ESE SWITCH EN UNO SOLO
+    }
+    prueba() {
+        var _a, _b, _c, _d;
+        let _userPattern = [];
+        const pushIntoUserPattern = (e) => _userPattern.push(e.target.textContent);
+        const r = (_a = document.getElementById('red')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', pushIntoUserPattern);
+        const g = (_b = document.getElementById('green')) === null || _b === void 0 ? void 0 : _b.addEventListener('click', pushIntoUserPattern);
+        const y = (_c = document.getElementById('yell')) === null || _c === void 0 ? void 0 : _c.addEventListener('click', pushIntoUserPattern);
+        const b = (_d = document.getElementById('blue')) === null || _d === void 0 ? void 0 : _d.addEventListener('click', pushIntoUserPattern);
+        console.log(_userPattern);
+        /* function pushIntoUserPattern() {
+            console.log("hola");
+        } */
     }
 }

@@ -51,9 +51,20 @@ export class IndexView {
                 b!.classList.remove('blue-light');
             }, 1000);
         }
-
-
         //TODO PONER ESE SWITCH EN UNO SOLO
+    }
+
+    public prueba () {
+        let _userPattern: number[] = [];
+        const pushIntoUserPattern = (e) => _userPattern.push(e.target.textContent);
+        const r = document.getElementById('red')?.addEventListener('click', pushIntoUserPattern);
+        const g = document.getElementById('green')?.addEventListener('click', pushIntoUserPattern);
+        const y = document.getElementById('yell')?.addEventListener('click', pushIntoUserPattern);
+        const b = document.getElementById('blue')?.addEventListener('click', pushIntoUserPattern);
+        console.log(_userPattern);
+        /* function pushIntoUserPattern() {
+            console.log("hola");
+        } */
 
     }
 }

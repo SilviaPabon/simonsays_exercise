@@ -16,22 +16,27 @@ export class IndexController {
     public start() {
         //todo de pronto esto de vista?
         const _btn = document.getElementById('btn-start');
+
         _btn?.addEventListener('click', (e) => {
             e.preventDefault();
             let stage = 0;
             this.view.initiate = true;
             if (this.view.initiate == true){
-                let n = 10;
-                this.model.obtainCombination(n).forEach((c, i) => {
+                let n = 2;
+                const arrayColors = this.model.obtainCombination(n);
+                arrayColors.forEach((c, i) => {
                     setTimeout(() => {
                         this.view.pintar(c)
                     }, (i+1) * 1200);
                     console.log("object");
+                    console.log(arrayColors[2]);
                 })
                 n++;
+
             }
             stage++;
         });
+        this.view.prueba();
 
     }
     //todo

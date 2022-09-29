@@ -97,3 +97,11 @@ body {
 .btn:hover {
     background-color: aquamarine;
 }
+
+table, th, td {
+    border: 2px solid white;
+}
+
+.table-top {
+    margin: 0 auto;
+}

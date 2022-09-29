@@ -21,28 +21,27 @@ export class IndexController {
 
         _btn?.addEventListener('click', (e) => {
             e.preventDefault();
-            let stage = 0;
             this.view.initiate = true;
             if (this.view.initiate == true){
-                let n = 2;
-                let simonColors = this.model.obtainCombination(n);
+                let level = 1;
+                let noTerminated = true;
+                let simonColors = this.model.obtainCombination(level);
                 simonColors.forEach((c, i) => {
                     setTimeout(() => {
                         this.view.pintar(c)
                     }, (i+1) * 1200);
                 })
-                n++;
                 this.userTurn = true;
                 if (this.userTurn == true) {
-                    this.userInput(simonColors);
+                    this.userInput(simonColors, noTerminated);
                 }
+                this.userTurn = false;
+                level++;
             }
-
-            stage++;
         });
     }
 
-    public userInput (simonPattern: number[]) {
+    public userInput (simonPattern: number[], noTerminated: boolean) {
         let arrayUser = this.model.userPattern;
         function checkUserPattern(e: any) {
             let turn = arrayUser.push(parseInt(e.target.id));
@@ -50,6 +49,9 @@ export class IndexController {
             console.log(typeof simonPattern[(turn-1)]);
             if (arrayUser[(turn-1)] !== simonPattern[(turn-1)]){
                 console.log("Game Over");
+                noTerminated = false;
+                return;
+            } else {
                 return;
             }
           }
@@ -59,9 +61,6 @@ export class IndexController {
         this.view.b?.addEventListener("click", checkUserPattern);
     }
 
-    public checkPattern () {
-
-    }
     //todo
     public test (name: string, point_player: number, level: number): void {
         this.model.winners.push({name_player: name, point_player: point_player, level: level})

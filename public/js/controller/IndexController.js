@@ -13,26 +13,26 @@ export class IndexController {
         const _btn = document.getElementById('btn-start');
         _btn === null || _btn === void 0 ? void 0 : _btn.addEventListener('click', (e) => {
             e.preventDefault();
-            let stage = 0;
             this.view.initiate = true;
             if (this.view.initiate == true) {
-                let n = 2;
-                let simonColors = this.model.obtainCombination(n);
+                let level = 1;
+                let noTerminated = true;
+                let simonColors = this.model.obtainCombination(level);
                 simonColors.forEach((c, i) => {
                     setTimeout(() => {
                         this.view.pintar(c);
                     }, (i + 1) * 1200);
                 });
-                n++;
                 this.userTurn = true;
                 if (this.userTurn == true) {
-                    this.userInput(simonColors);
+                    this.userInput(simonColors, noTerminated);
                 }
+                this.userTurn = false;
+                level++;
             }
-            stage++;
         });
     }
-    userInput(simonPattern) {
+    userInput(simonPattern, noTerminated) {
         var _a, _b, _c, _d;
         let arrayUser = this.model.userPattern;
         function checkUserPattern(e) {
@@ -41,6 +41,10 @@ export class IndexController {
             console.log(typeof simonPattern[(turn - 1)]);
             if (arrayUser[(turn - 1)] !== simonPattern[(turn - 1)]) {
                 console.log("Game Over");
+                noTerminated = false;
+                return;
+            }
+            else {
                 return;
             }
         }
@@ -48,8 +52,6 @@ export class IndexController {
         (_b = this.view.g) === null || _b === void 0 ? void 0 : _b.addEventListener("click", checkUserPattern);
         (_c = this.view.y) === null || _c === void 0 ? void 0 : _c.addEventListener("click", checkUserPattern);
         (_d = this.view.b) === null || _d === void 0 ? void 0 : _d.addEventListener("click", checkUserPattern);
-    }
-    checkPattern() {
     }
     //todo
     test(name, point_player, level) {

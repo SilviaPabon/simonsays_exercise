@@ -5,6 +5,8 @@ export class IndexController {
     public model: IndexModel;
     public view: IndexView;
 
+    public userTurn : boolean = false;
+
     constructor(model: IndexModel, view: IndexView) {
         this.model = model;
         this.view = view;
@@ -23,20 +25,41 @@ export class IndexController {
             this.view.initiate = true;
             if (this.view.initiate == true){
                 let n = 2;
-                const arrayColors = this.model.obtainCombination(n);
-                arrayColors.forEach((c, i) => {
+                let simonColors = this.model.obtainCombination(n);
+                simonColors.forEach((c, i) => {
                     setTimeout(() => {
                         this.view.pintar(c)
                     }, (i+1) * 1200);
-                    console.log("object");
-                    console.log(arrayColors[2]);
                 })
                 n++;
-
+                this.userTurn = true;
+                if (this.userTurn == true) {
+                    this.userInput(simonColors);
+                }
             }
+
             stage++;
         });
-        this.view.prueba();
+    }
+
+    public userInput (simonPattern: number[]) {
+        let arrayUser = this.model.userPattern;
+        function checkUserPattern(e: any) {
+            let turn = arrayUser.push(parseInt(e.target.id));
+            console.log(typeof arrayUser[(turn-1)]);
+            console.log(typeof simonPattern[(turn-1)]);
+            if (arrayUser[(turn-1)] !== simonPattern[(turn-1)]){
+                console.log("Game Over");
+                return;
+            }
+          }
+        this.view.r?.addEventListener("click", checkUserPattern);
+        this.view.g?.addEventListener("click", checkUserPattern);
+        this.view.y?.addEventListener("click", checkUserPattern);
+        this.view.b?.addEventListener("click", checkUserPattern);
+    }
+
+    public checkPattern () {
 
     }
     //todo

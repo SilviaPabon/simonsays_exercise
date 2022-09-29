@@ -4,6 +4,8 @@ export class IndexModel {
         this.colors = ['G', 'R', 'Y', 'B'];
         //todo
         this._winners = [];
+        this.simonPattern = [];
+        this.userPattern = [];
         this.colors;
         this._winners = [];
     }
@@ -15,11 +17,10 @@ export class IndexModel {
     }
     //retorna array d n posiciones, con números del 0 al 3 random
     obtainCombination(n) {
-        let _colorsArray = [];
         for (let index = 0; index < n; index++) {
             let color = Math.floor(Math.random() * (3 - 0 + 1)) + 0;
-            _colorsArray.push(color);
+            this.simonPattern.push(color);
         }
-        return _colorsArray;
+        return this.simonPattern;
     }
 }

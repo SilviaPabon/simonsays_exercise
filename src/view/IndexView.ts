@@ -4,6 +4,11 @@ export class IndexView {
     //todo
     private _initiate: boolean = false;
 
+    public g = document.getElementById('0');
+    public r = document.getElementById('1');
+    public y = document.getElementById('2');
+    public b = document.getElementById('3');
+
     constructor() {
         this._display = this.getElement('.container');
     }
@@ -25,46 +30,28 @@ export class IndexView {
     }
     //va pintando o iluminando los botones luego de start()
     public pintar(orden: number){
-        const r = document.getElementById('red');
-        const g = document.getElementById('green');
-        const y = document.getElementById('yell');
-        const b = document.getElementById('blue');
-
         if (orden == 0) {
-            g!.classList.add('green-light');
+            this.g!.classList.add('green-light');
             setTimeout(() => {
-                g!.classList.remove('green-light');
+                this.g!.classList.remove('green-light');
             }, 1000);
         } else if (orden == 1) {
-            r!.classList.add('red-light');
+            this.r!.classList.add('red-light');
             setTimeout(() => {
-                r!.classList.remove('red-light');
+                this.r!.classList.remove('red-light');
             }, 1000);
         } else if (orden == 2) {
-            y!.classList.add('yellow-light');
+            this.y!.classList.add('yellow-light');
             setTimeout(() => {
-                y!.classList.remove('yellow-light');
+                this.y!.classList.remove('yellow-light');
             }, 1000);
         } else if (orden == 3) {
-            b!.classList.add('blue-light');
+            this.b!.classList.add('blue-light');
             setTimeout(() => {
-                b!.classList.remove('blue-light');
+                this.b!.classList.remove('blue-light');
             }, 1000);
         }
         //TODO PONER ESE SWITCH EN UNO SOLO
     }
 
-    public prueba () {
-        let _userPattern: number[] = [];
-        const pushIntoUserPattern = (e) => _userPattern.push(e.target.textContent);
-        const r = document.getElementById('red')?.addEventListener('click', pushIntoUserPattern);
-        const g = document.getElementById('green')?.addEventListener('click', pushIntoUserPattern);
-        const y = document.getElementById('yell')?.addEventListener('click', pushIntoUserPattern);
-        const b = document.getElementById('blue')?.addEventListener('click', pushIntoUserPattern);
-        console.log(_userPattern);
-        /* function pushIntoUserPattern() {
-            console.log("hola");
-        } */
-
-    }
 }

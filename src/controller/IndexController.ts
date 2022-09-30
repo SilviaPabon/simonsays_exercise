@@ -28,10 +28,15 @@ export class IndexController {
 
     //el turno de simon
     public simonTurn() {
+        document.getElementById('simon').style.visibility = 'visible';
         this.model.simonPattern = this.model.obtainCombination(this.model.round);
         this.view.generaColores(this.model.simonPattern, this.model.difficulty);
         console.log("simon turn");
-        setTimeout(() => {console.log("Get ready for this folk");}, this.model.round * 500 + 1000);
+        setTimeout(() => {console.log("Get ready for this folk");
+        document.getElementById('simon').style.visibility = 'hidden';
+        document.getElementById('human').style.visibility = 'visible';
+        }, this.model.round * 500 + 1000);
+
     }
     //el turno del usuario
     public userInput() {
@@ -45,6 +50,7 @@ export class IndexController {
                 let db = this.model.winners;
                 this.view.showTable(db);
                 this.restartSimonSay();
+                document.getElementById('human').style.visibility = 'hidden';
                 return true;
             }
             //hasta que la cantidad de userinput no sea igual a la del turno y le queda bien, no pasa a ste ronda
@@ -53,7 +59,9 @@ export class IndexController {
                 this.model.userPattern.splice(0);
                 console.log("You are amazing folk");
                 this.model.round++;
-                setTimeout(() => {this.simonTurn();}, 1000);
+                setTimeout(() => {this.simonTurn();
+                document.getElementById('human').style.visibility = 'hidden';
+                }, 1000);
                 return true;
             }
         }

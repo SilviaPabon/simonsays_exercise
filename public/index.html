@@ -14,7 +14,8 @@
     <div class="container">
 
         <h1 class="text-center">Simon Says</h1>
-        <h4 class="turn text-center">Your turn</h4>
+        <h4 id="human" class="turn text-center">Your turn</h4>
+        <h4 id="simon" class="turn text-center">Simon turn</h4>
         <div class="flex-container">
             <div id="0" class="sbtn green" value="0">G</div>
             <audio class="z" src="./music/1.mp3" ></audio>
@@ -38,7 +39,7 @@
             <button id="start" type="reset">START</button>
         </dialog>
         <dialog id="askname">
-            <h2>Tell me yor name</h2>
+            <h2>:( You Lost! Tell me yor name:</h2>
             <input type="text" name="userName" id="userName">
             <button id="sendName" type="reset">Send Name</button>
         </dialog>
@@ -50,18 +51,21 @@
     </div>
     <br>
     <div class="container-2">
-        <table class="table-top">
-            <caption>TOP 10 PLAYERS</caption>
-            <tr>
-              <th>User Name</th>
-              <th>Points</th>
-              <th>Dificulty Level</th>
-            </tr>
-            <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-            </tr>
+        <table class="top-table">
+            <thead>
+              <tr>
+                <td>
+                  <b>Name</b>
+                </td>
+                <td>
+                  <b>Points</b>
+                </td>
+                <td>
+                    <b>Level</b>
+                </td>
+              </tr>
+            </thead>
+            <tr id="root"></tr>
         </table>
     </div>
     <script src="./js/index.js" type="module"></script>

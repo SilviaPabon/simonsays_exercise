@@ -39,10 +39,11 @@ export class IndexController {
                 console.log("Game Over");
                 this.view.modalName();
                 this.model.sendDataBase();
-                let db = this.model.winners;
-                this.view.showTable(db);
-                this.restartSimonSay();
                 document.getElementById('human').style.visibility = 'hidden';
+                let db = this.model.winners;
+                console.log(db, "hh");
+                this.restartSimonSay();
+                this.view.showTable(db);
                 return true;
             }
             //hasta que la cantidad de userinput no sea igual a la del turno y le queda bien, no pasa a ste ronda

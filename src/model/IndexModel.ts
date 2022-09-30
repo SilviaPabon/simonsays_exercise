@@ -1,6 +1,7 @@
 export class IndexModel {
     //todo
-    private _winners: { name_player: string, point_player: number, level: number }[] = [];
+
+    private _winners:  Array<{}> = [];
 
     public simonPattern: number[] = [];
     public userPattern: number[] = [];
@@ -16,7 +17,7 @@ export class IndexModel {
     public get winners() {
         return this._winners;
     }
-    public set winners(winners: { name_player: string, point_player: number, level: number }[]) {
+    public set winners(winners: Array<{}>) {
         this._winners = winners;
     }
     //todo
@@ -58,6 +59,7 @@ export class IndexModel {
         buttonSend?.addEventListener('click', (e) => {
             if (this._winners.length < 10) {
                 this._winners.push({name_player: input.value, point_player: this.round, level: this.difficulty})
+                console.log(this._winners, "h");
             }
             modalName?.close();
         })

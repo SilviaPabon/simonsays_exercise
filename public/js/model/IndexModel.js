@@ -51,6 +51,7 @@ export class IndexModel {
         buttonSend === null || buttonSend === void 0 ? void 0 : buttonSend.addEventListener('click', (e) => {
             if (this._winners.length < 10) {
                 this._winners.push({ name_player: input.value, point_player: this.round, level: this.difficulty });
+                console.log(this._winners, "h");
             }
             modalName === null || modalName === void 0 ? void 0 : modalName.close();
         });

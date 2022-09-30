@@ -28,13 +28,13 @@ export class IndexController {
 
     //el turno de simon
     public simonTurn() {
-        document.getElementById('simon').style.visibility = 'visible';
+        document.getElementById('simon')!.style.visibility = 'visible';
         this.model.simonPattern = this.model.obtainCombination(this.model.round);
         this.view.generaColores(this.model.simonPattern, this.model.difficulty);
         console.log("simon turn");
         setTimeout(() => {console.log("Get ready for this folk");
-        document.getElementById('simon').style.visibility = 'hidden';
-        document.getElementById('human').style.visibility = 'visible';
+        document.getElementById('simon')!.style.visibility = 'hidden';
+        document.getElementById('human')!.style.visibility = 'visible';
         }, this.model.round * 500 + 1000);
 
     }
@@ -47,10 +47,11 @@ export class IndexController {
                 console.log("Game Over");
                 this.view.modalName();
                 this.model.sendDataBase();
+                document.getElementById('human')!.style.visibility = 'hidden';
                 let db = this.model.winners;
-                this.view.showTable(db);
+                console.log(db, "hh");
                 this.restartSimonSay();
-                document.getElementById('human').style.visibility = 'hidden';
+                this.view.showTable(db);
                 return true;
             }
             //hasta que la cantidad de userinput no sea igual a la del turno y le queda bien, no pasa a ste ronda
@@ -60,7 +61,7 @@ export class IndexController {
                 console.log("You are amazing folk");
                 this.model.round++;
                 setTimeout(() => {this.simonTurn();
-                document.getElementById('human').style.visibility = 'hidden';
+                document.getElementById('human')!.style.visibility = 'hidden';
                 }, 1000);
                 return true;
             }

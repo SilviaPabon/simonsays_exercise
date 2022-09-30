@@ -76,30 +76,10 @@ export class IndexView {
         modalName.showModal();
     }
 
-    public showTable(db: any){
-        let table = document.getElementById('table-top')
-        for(let info in db){
-            let row = table.insertRow();
-            let column_ = row.insertCell();
-            let column = row.insertCell();
-            column_.innetHTML = info;
-            column.innerHTML = db[info];
-        }
-        let t = "<table>"
-        for(let k in db){
-            t += `
-            <tr>
-            <td>
-            ${k}
-            </td>
-            <td>
-            ${db[k]}
-            </td>
-            </tr>`;
-        }
-        t += "</table>"
-        let div = document.getElementById('container-2')?.innerHTML
-        div = t;
+    public showTable(db){
+        let usertable = document.getElementById('userstable');
+/*         db.forEach(user => usertable!.insertAdjacentHTML('beforebegin', `<tr><td>${user.name_player}</td><td>${user.point_player}</td><td>${user.level}</td></tr>`));
+ */     console.log(db, "vie");
     }
 
 }

@@ -1,61 +1,62 @@
 export class IndexController {
     constructor(model, view) {
-        this.userTurn = false;
         this.model = model;
         this.view = view;
-        //this.test("maría", 5, 5);
-        //console.log(this.view.initiate);
-        this.start();
+        this.begin();
+        this.userInput();
     }
-    //corrobora si el botón de start ha sido activado e inicia
-    start() {
-        //todo de pronto esto de vista?
-        const _btn = document.getElementById('btn-start');
-        _btn === null || _btn === void 0 ? void 0 : _btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.view.initiate = true;
-            if (this.view.initiate == true) {
-                let level = 1;
-                let noTerminated = true;
-                let simonColors = this.model.obtainCombination(level);
-                simonColors.forEach((c, i) => {
-                    setTimeout(() => {
-                        this.view.pintar(c);
-                    }, (i + 1) * 1200);
-                });
-                this.userTurn = true;
-                if (this.userTurn == true) {
-                    this.userInput(simonColors, noTerminated);
-                }
-                this.userTurn = false;
-                level++;
-            }
+    //inicializa el juego, llamando a que Simón diga su patrón
+    begin() {
+        const startbtn = document.getElementById('start');
+        const modalDif = document.getElementById('modaldif');
+        this.model.startButton();
+        startbtn === null || startbtn === void 0 ? void 0 : startbtn.addEventListener('click', () => {
+            modalDif.close();
+            this.simonTurn();
+            console.log("click start");
         });
     }
-    userInput(simonPattern, noTerminated) {
+    //establece la dificultad del juego
+    //el turno de simon
+    simonTurn() {
+        this.model.simonPattern = this.model.obtainCombination(this.model.round);
+        this.view.generaColores(this.model.simonPattern, this.model.difficulty);
+        console.log("simon turn");
+        setTimeout(() => { console.log("Get ready for this folk"); }, this.model.round * 500 + 1000);
+    }
+    //el turno del usuario
+    userInput() {
         var _a, _b, _c, _d;
-        let arrayUser = this.model.userPattern;
-        function checkUserPattern(e) {
-            let turn = arrayUser.push(parseInt(e.target.id));
-            console.log(typeof arrayUser[(turn - 1)]);
-            console.log(typeof simonPattern[(turn - 1)]);
-            if (arrayUser[(turn - 1)] !== simonPattern[(turn - 1)]) {
+        const checkUserPattern = (e) => {
+            let turn = this.model.userPattern.push(parseInt(e.target.id));
+            let roundLen = this.model.simonPattern.length;
+            if (this.model.userPattern[(turn - 1)] !== this.model.simonPattern[(turn - 1)]) {
                 console.log("Game Over");
-                noTerminated = false;
-                return;
+                this.view.modalName();
+                this.model.sendDataBase();
+                let db = this.model.winners;
+                this.view.showTable(db);
+                this.restartSimonSay();
+                return true;
             }
-            else {
-                return;
+            //hasta que la cantidad de userinput no sea igual a la del turno y le queda bien, no pasa a ste ronda
+            if (roundLen == turn) {
+                this.model.simonPattern.splice(0);
+                this.model.userPattern.splice(0);
+                console.log("You are amazing folk");
+                this.model.round++;
+                setTimeout(() => { this.simonTurn(); }, 1000);
+                return true;
             }
-        }
-        (_a = this.view.r) === null || _a === void 0 ? void 0 : _a.addEventListener("click", checkUserPattern);
-        (_b = this.view.g) === null || _b === void 0 ? void 0 : _b.addEventListener("click", checkUserPattern);
+        };
+        (_a = this.view.g) === null || _a === void 0 ? void 0 : _a.addEventListener("click", checkUserPattern);
+        (_b = this.view.r) === null || _b === void 0 ? void 0 : _b.addEventListener("click", checkUserPattern);
         (_c = this.view.y) === null || _c === void 0 ? void 0 : _c.addEventListener("click", checkUserPattern);
         (_d = this.view.b) === null || _d === void 0 ? void 0 : _d.addEventListener("click", checkUserPattern);
     }
-    //todo
-    test(name, point_player, level) {
-        this.model.winners.push({ name_player: name, point_player: point_player, level: level });
-        console.log(this.model.winners);
+    restartSimonSay() {
+        this.model.round = 1;
+        this.model.simonPattern = [];
+        this.model.userPattern = [];
     }
 }

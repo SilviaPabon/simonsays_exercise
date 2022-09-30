@@ -17,13 +17,31 @@
         <h4 class="turn text-center">Your turn</h4>
         <div class="flex-container">
             <div id="0" class="sbtn green" value="0">G</div>
+            <audio class="z" src="./music/1.mp3" ></audio>
             <div id="1" class="sbtn red" value="1">R</div>
+            <audio class="u" src="./music/2.mp3" ></audio>
         </div>
         <div class="flex-container">
             <div id="2" class="sbtn yellow" value="2">Y</div>
+            <audio class="t" src="./music/3.mp3" ></audio>
             <div id="3" class="sbtn blue" value="3">B</div>
+            <audio class="tr" src="./music/4.mp3" ></audio>
         </div>
-
+        <dialog id="modaldif">
+            <h2>First things first, chose the level</h2>
+            <div>
+                <button id="700" type="reset">Easy</button>
+                <button id="500" type="reset">Normal</button>
+                <button id="100" type="reset">Hard</button>
+            </div>
+            <p>Now, you can START</p>
+            <button id="start" type="reset">START</button>
+        </dialog>
+        <dialog id="askname">
+            <h2>Tell me yor name</h2>
+            <input type="text" name="userName" id="userName">
+            <button id="sendName" type="reset">Send Name</button>
+        </dialog>
         <div class="flex-container">
             <div class="text-center">
                 <a id="btn-start" href="" class="btn">Start</a>

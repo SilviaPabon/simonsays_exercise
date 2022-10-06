@@ -48,11 +48,19 @@ export class IndexModel {
         const modalName = document.getElementById('askname');
         const input = document.getElementById('userName');
         const buttonSend = document.getElementById('sendName');
+        let usertable = document.getElementById('userstable');
         buttonSend === null || buttonSend === void 0 ? void 0 : buttonSend.addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log("this._winners");
             if (this._winners.length < 10) {
-                this._winners.push({ name_player: input.value, point_player: this.round, level: this.difficulty });
-                console.log(this._winners, "h");
+                this.winners.push({ name_player: "aaa", point_player: 111, level: 111 });
+                console.log(this._winners.length);
+                let usertable = document.getElementById('userstable');
+                let tabla = document.getElementById('top-table');
+                var rowCount = document.getElementsByClassName('top-table').length;
+                console.log(this.winners);
             }
+            usertable.insertAdjacentHTML('beforebegin', `<tr id="tableex"><td>ccc</td><td>bbb</td><td>xxx</td></tr>`);
             modalName === null || modalName === void 0 ? void 0 : modalName.close();
         });
     }

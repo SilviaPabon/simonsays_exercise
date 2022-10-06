@@ -68,18 +68,13 @@ export class IndexView {
             setTimeout(() => {this.pintar(c, level);}, (i+1) * 500);
         })
     }
-
+    //despliega modal al final
     public modalName(){
-        const modalName = document.getElementById('askname');
+        const modalName: any = document.getElementById('askname');
         const input = document.getElementById('userName');
         const buttonSend = document.getElementById('sendName');
         modalName.showModal();
     }
 
-    public showTable(db){
-        let usertable = document.getElementById('userstable');
-/*         db.forEach(user => usertable!.insertAdjacentHTML('beforebegin', `<tr><td>${user.name_player}</td><td>${user.point_player}</td><td>${user.level}</td></tr>`));
- */     console.log(db, "vie");
-    }
 
 }

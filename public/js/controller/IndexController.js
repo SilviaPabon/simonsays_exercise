@@ -37,13 +37,8 @@ export class IndexController {
             let roundLen = this.model.simonPattern.length;
             if (this.model.userPattern[(turn - 1)] !== this.model.simonPattern[(turn - 1)]) {
                 console.log("Game Over");
-                this.view.modalName();
-                this.model.sendDataBase();
                 document.getElementById('human').style.visibility = 'hidden';
-                let db = this.model.winners;
-                console.log(db, "hh");
                 this.restartSimonSay();
-                this.view.showTable(db);
                 return true;
             }
             //hasta que la cantidad de userinput no sea igual a la del turno y le queda bien, no pasa a ste ronda
@@ -68,5 +63,7 @@ export class IndexController {
         this.model.round = 1;
         this.model.simonPattern = [];
         this.model.userPattern = [];
+        this.view.modalName();
+        this.model.sendDataBase();
     }
 }

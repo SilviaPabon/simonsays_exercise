@@ -1,6 +1,9 @@
 export class IndexView {
     constructor() {
         this.getElement = (selector) => document.querySelector(selector);
+        this.prueba = () => {
+            this.modalname.close();
+        };
         this._display = this.getElement('.container');
         this.g = document.getElementById('0');
         this.gs = document.querySelector('.z');
@@ -19,6 +22,8 @@ export class IndexView {
         this.btnHard = document.getElementById('100');
         this.btnModalStart = document.getElementById('start');
         this.modalname = document.getElementById('askname');
+        this.input = document.getElementById('userName');
+        this.form = document.getElementById('form');
         this.btnModalName = document.getElementById('sendName');
     }
     set display(display) {
@@ -26,6 +31,12 @@ export class IndexView {
     }
     get display() {
         return this._display;
+    }
+    get userName() {
+        return this._userName = this.input.value;
+    }
+    set userName(userName) {
+        this._display = userName;
     }
     //va pintando o iluminando los botones luego de start()
     pintar(orden, level) {
@@ -104,13 +115,16 @@ export class IndexView {
         this.b.addEventListener('click', handler);
     }
     buttonSendGameOver(handler) {
-        const input = document.getElementById('userName');
-        console.log("before");
-        this.btnModalName.addEventListener('click', (e) => {
+        const input = document.getElementById('form');
+        //const n = "8000";
+        this.form.addEventListener('submit', (e) => {
             e.preventDefault();
-            e.stopPropagation();
-            handler(input.value);
-            //location.reload();
+            console.log(this.userName);
+            if (this.userName) {
+                handler(this.userName);
+                this.input.value = '';
+                this.prueba();
+            }
         });
     }
 }

@@ -5,6 +5,8 @@ export class IndexController {
     public model: IndexModel;
     public view: IndexView;
 
+    public prueba: boolean = false;
+
     constructor(model: IndexModel, view: IndexView) {
         this.model = model;
         this.view = view;
@@ -51,7 +53,8 @@ export class IndexController {
         if (this.model.userPattern[(turn-1)] !== this.model.simonPattern[(turn-1)]){
             console.log("Game Over");
             this.view.visibleTitle('human', 'hidden');
-            this.showModal();
+            this.view.modalname.showModal();
+            this.view.buttonSendGameOver(this.handleSend);
             this.restartSimonSay();
             return true;
         }
@@ -76,15 +79,9 @@ export class IndexController {
     }
 
     public restartSimonSay(){
-        this.view.modalname.close();
         this.model.round = 1;
         this.model.simonPattern = [];
         this.model.userPattern = [];
-    }
 
-    public showModal(){
-        this.view.modalname.showModal();
-        console.log("showmodal");
-        this.view.buttonSendGameOver(this.handleSend);
     }
 }

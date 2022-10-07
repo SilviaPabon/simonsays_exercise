@@ -1,5 +1,6 @@
 export class IndexController {
     constructor(model, view) {
+        this.prueba = false;
         //todo quizá bloquear las teclas
         //el turno de simon
         this.simonTurn = () => {
@@ -19,7 +20,8 @@ export class IndexController {
             if (this.model.userPattern[(turn - 1)] !== this.model.simonPattern[(turn - 1)]) {
                 console.log("Game Over");
                 this.view.visibleTitle('human', 'hidden');
-                this.showModal();
+                this.view.modalname.showModal();
+                this.view.buttonSendGameOver(this.handleSend);
                 this.restartSimonSay();
                 return true;
             }
@@ -68,14 +70,8 @@ export class IndexController {
         //this.simonTurn();
     }
     restartSimonSay() {
-        this.view.modalname.close();
         this.model.round = 1;
         this.model.simonPattern = [];
         this.model.userPattern = [];
-    }
-    showModal() {
-        this.view.modalname.showModal();
-        console.log("showmodal");
-        this.view.buttonSendGameOver(this.handleSend);
     }
 }

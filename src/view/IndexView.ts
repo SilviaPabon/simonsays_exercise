@@ -25,6 +25,9 @@ export class IndexView {
     //modal askname
     public modalname: any;
     public btnModalName: any;
+    public input: any;
+    private _userName: any;
+    public form: any;
 
     constructor() {
         this._display = this.getElement('.container');
@@ -49,6 +52,8 @@ export class IndexView {
         this.btnModalStart = document.getElementById('start');
 
         this.modalname = document.getElementById('askname');
+        this.input = document.getElementById('userName');
+        this.form = document.getElementById('form');
         this.btnModalName = document.getElementById('sendName');
     }
 
@@ -59,6 +64,13 @@ export class IndexView {
     }
     public get display() {
         return this._display;
+    }
+
+    public get userName() {
+        return this._userName = this.input.value
+    }
+    public set userName(userName: any) {
+        this._display = userName;
     }
 
     //va pintando o iluminando los botones luego de start()
@@ -140,13 +152,22 @@ export class IndexView {
     }
 
     public buttonSendGameOver(handler: Function) {
-        const input: any = document.getElementById('userName');
-        console.log("before");
-        this.btnModalName.addEventListener('click', (e: any) => {
-            e.preventDefault();
-            e.stopPropagation()
-            handler(input.value);
-            //location.reload();
-        });
+        const input: any = document.getElementById('form');
+        //const n = "8000";
+        this.form.addEventListener('submit', (e: any) => {
+            e.preventDefault()
+            console.log(this.userName);
+            if (this.userName) {
+                handler(this.userName);
+                this.input.value = '';
+                this.prueba();
+            }
+        })
+
+
+    }
+
+    public prueba = () => {
+        this.modalname.close();
     }
 }

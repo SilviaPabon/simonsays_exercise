@@ -73,10 +73,26 @@ export class IndexController {
     }
 
     public handleSend = (player: string) => {
-        this.model.winners.push({name_player: player, point_player: this.model.round, level: this.model.difficulty})
-        console.log(this.model.winners, "prueba");
-        //localStorage.setItem("winners", this.model.winners.toString());
-        //console.log(localStorage);
+        let difficulty: string = '';
+        switch (this.model.difficulty) {
+            case 700:
+                difficulty = 'Easy';
+                break;
+            case 500:
+                difficulty = 'Normal';
+                break;
+            case 100:
+                difficulty = 'Hard';
+                break;
+            default:
+                break;
+        }
+        this.model.winners.push({name_player: player, point_player: this.model.round, level: difficulty})
+        //console.log(this.model.winners, "prueba");
+        localStorage.setItem('winners', JSON.stringify(this.model.winners));
+        let prueba = JSON.parse(localStorage.getItem(('winners')));
+
+        this.view.showTable(prueba);
     }
 
     public restartSimonSay(){

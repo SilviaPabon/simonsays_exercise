@@ -152,8 +152,6 @@ export class IndexView {
     }
 
     public buttonSendGameOver(handler: Function) {
-        const input: any = document.getElementById('form');
-        //const n = "8000";
         this.form.addEventListener('submit', (e: any) => {
             e.preventDefault()
             console.log(this.userName);
@@ -163,8 +161,14 @@ export class IndexView {
             }
             this.visibleTitle('form', 'hidden');
         })
+    }
 
-
+    public showTable(list: any){
+        let usertable = document.getElementById('userstable')!;
+        if (list.length < 10) {
+            console.log(list.length);
+        }
+        list.forEach((user: player) => usertable.insertAdjacentHTML('beforebegin', `<tr><td>${user.name_player}</td><td>${user.point_player}</td><td>${user.level}</td></tr>`));
     }
 
 }

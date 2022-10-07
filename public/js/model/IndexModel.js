@@ -48,33 +48,4 @@ export class IndexModel {
         }
         return this.simonPattern;
     }
-    /*
-    modal del nombre abierto: this.view
-    evento en el botón de enviar: this.view
-    guardar en la lista de ganadores: this.controller {this.modelo}
-    mostrar la tabla: vista
-
-    vista
-    public mostrartabla(array de ){
-        limpiar y generar
-    }
-    */
-    sendDataBase() {
-        const modalName = document.getElementById('askname');
-        const buttonSend = document.getElementById('sendName');
-        let usertable = document.getElementById('userstable');
-        buttonSend === null || buttonSend === void 0 ? void 0 : buttonSend.addEventListener('click', (e) => {
-            e.preventDefault();
-            console.log("this._winners");
-            if (this._winners.length < 10) {
-                this.winners.push({ name_player: "aaa", point_player: 111, level: 111 });
-                console.log(this._winners.length);
-                let usertable = document.getElementById('userstable');
-                let tabla = document.getElementById('top-table');
-                console.log(this.winners);
-            }
-            usertable.insertAdjacentHTML('beforebegin', `<tr id="tableex"><td>ccc</td><td>bbb</td><td>xxx</td></tr>`);
-            modalName === null || modalName === void 0 ? void 0 : modalName.close();
-        });
-    }
 }

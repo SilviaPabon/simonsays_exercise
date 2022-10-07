@@ -66,24 +66,4 @@ export class IndexModel {
         limpiar y generar
     }
     */
-
-    public sendDataBase() {
-        const modalName: any = document.getElementById('askname');
-        const buttonSend = document.getElementById('sendName');
-        let usertable = document.getElementById('userstable')!;
-        buttonSend?.addEventListener('click', (e) => {
-            e.preventDefault();
-            console.log("this._winners");
-            if (this._winners.length < 10) {
-                this.winners.push({name_player: "aaa", point_player: 111, level: 111});
-                console.log(this._winners.length);
-                let usertable = document.getElementById('userstable')!;
-                let tabla = document.getElementById('top-table');
-                console.log(this.winners);
-            }
-            usertable.insertAdjacentHTML('beforebegin', `<tr id="tableex"><td>ccc</td><td>bbb</td><td>xxx</td></tr>`);
-            modalName?.close();
-        })
-
-    }
 }

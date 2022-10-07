@@ -112,8 +112,6 @@ export class IndexView {
         this.b.addEventListener('click', handler);
     }
     buttonSendGameOver(handler) {
-        const input = document.getElementById('form');
-        //const n = "8000";
         this.form.addEventListener('submit', (e) => {
             e.preventDefault();
             console.log(this.userName);
@@ -123,5 +121,12 @@ export class IndexView {
             }
             this.visibleTitle('form', 'hidden');
         });
+    }
+    showTable(list) {
+        let usertable = document.getElementById('userstable');
+        if (list.length < 10) {
+            console.log(list.length);
+        }
+        list.forEach((user) => usertable.insertAdjacentHTML('beforebegin', `<tr><td>${user.name_player}</td><td>${user.point_player}</td><td>${user.level}</td></tr>`));
     }
 }

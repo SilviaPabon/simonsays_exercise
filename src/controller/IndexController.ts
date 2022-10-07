@@ -10,10 +10,10 @@ export class IndexController {
         this.view = view;
 
         this.begin();
-        this.userInput();
+        this.view.listenPattern(this.userInput);
     }
     //inicializa el juego, llamando a que Simón diga su patrón
-    public begin() {
+    /* public begin() {
         const startbtn = document.getElementById('start');
         const modalDif: any = document.getElementById('modaldif');
         this.model.startButton();
@@ -23,55 +23,68 @@ export class IndexController {
             console.log("click start");
         });
 
+    } */
+    //inicialización del juego
+    public begin() {
+        //start button - modal dificulty
+        this.view.listenStart(this.model.setDifficulty);
+        this.view.listenStartGame(this.simonTurn);
+        //this.view.modalDif.close();
+        //this.simonTurn();
     }
-    //establece la dificultad del juego
-
+    //todo quizá bloquear las teclas
     //el turno de simon
-    public simonTurn() {
-        document.getElementById('simon')!.style.visibility = 'visible';
+    public simonTurn = () => {
+        this.view.visibleTitle('simon', 'visible');
         this.model.simonPattern = this.model.obtainCombination(this.model.round);
         this.view.generaColores(this.model.simonPattern, this.model.difficulty);
-        console.log("simon turn");
         setTimeout(() => {console.log("Get ready for this folk");
-        document.getElementById('simon')!.style.visibility = 'hidden';
-        document.getElementById('human')!.style.visibility = 'visible';
+        this.view.visibleTitle('simon', 'hidden');
+        this.view.visibleTitle('human', 'visible');
         }, this.model.round * 500 + 1000);
-
     }
+
     //el turno del usuario
-    public userInput() {
-        const checkUserPattern = (e: any) => {
-            let turn = this.model.userPattern.push(parseInt(e.target.id));
-            let roundLen = this.model.simonPattern.length;
-            if (this.model.userPattern[(turn-1)] !== this.model.simonPattern[(turn-1)]){
-                console.log("Game Over");
-                document.getElementById('human')!.style.visibility = 'hidden';
-                this.restartSimonSay();
-                return true;
-            }
-            //hasta que la cantidad de userinput no sea igual a la del turno y le queda bien, no pasa a ste ronda
-            if (roundLen == turn){
-                this.model.simonPattern.splice(0);
-                this.model.userPattern.splice(0);
-                console.log("You are amazing folk");
-                this.model.round++;
-                setTimeout(() => {this.simonTurn();
-                document.getElementById('human')!.style.visibility = 'hidden';
-                }, 1000);
-                return true;
-            }
+    public userInput = (e: any) => {
+        let turn = this.model.userPattern.push(parseInt(e.target.id));
+        let roundLen = this.model.simonPattern.length;
+        if (this.model.userPattern[(turn-1)] !== this.model.simonPattern[(turn-1)]){
+            console.log("Game Over");
+            this.view.visibleTitle('human', 'hidden');
+            this.showModal();
+            this.restartSimonSay();
+            return true;
         }
-        this.view.g?.addEventListener("click", checkUserPattern);
-        this.view.r?.addEventListener("click", checkUserPattern);
-        this.view.y?.addEventListener("click", checkUserPattern);
-        this.view.b?.addEventListener("click", checkUserPattern);
+        //hasta que la cantidad de userinput no sea igual a la del turno y le queda bien, no pasa a ste ronda
+        if (roundLen == turn){
+            this.model.simonPattern.splice(0);
+            this.model.userPattern.splice(0);
+            console.log("You are amazing folk");
+            this.model.round++;
+            setTimeout(() => {this.simonTurn();
+                this.view.visibleTitle('human', 'hidden');
+            }, 1000);
+            return true;
+        }
+    }
+
+    public handleSend = (player: string) => {
+        this.model.winners.push({name_player: player, point_player: this.model.round, level: this.model.difficulty})
+        console.log(this.model.winners, "prueba");
+        //localStorage.setItem("winners", this.model.winners.toString());
+        //console.log(localStorage);
     }
 
     public restartSimonSay(){
+        this.view.modalname.close();
         this.model.round = 1;
         this.model.simonPattern = [];
         this.model.userPattern = [];
-        this.view.modalName();
-        this.model.sendDataBase()
+    }
+
+    public showModal(){
+        this.view.modalname.showModal();
+        console.log("showmodal");
+        this.view.buttonSendGameOver(this.handleSend);
     }
 }

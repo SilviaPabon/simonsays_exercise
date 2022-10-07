@@ -1,5 +1,4 @@
 export class IndexModel {
-    //todo
 
     private _winners:  Array<player> = [];
 
@@ -11,7 +10,7 @@ export class IndexModel {
 
 
     constructor() {
-        this._winners = [];
+        this._winners;
     }
 
     public get winners(): Array<player> {
@@ -21,7 +20,7 @@ export class IndexModel {
         this._winners = winners;
     }
     //todo
-    public startButton(){
+    /* public startButton(){
         const _btn = document.getElementById('btn-start');
         const modalDif: any = document.getElementById('modaldif');
         _btn?.addEventListener('click', (e) => {
@@ -29,9 +28,9 @@ export class IndexModel {
             modalDif.showModal();
             this.setDifficulty();
         });
-    }
+    } */
     //todo
-    public setDifficulty(){
+    /* public setDifficulty(){
         const easy = document.getElementById('700');
         const normal = document.getElementById('500');
         const hard = document.getElementById('100');
@@ -42,7 +41,12 @@ export class IndexModel {
         easy?.addEventListener('click', setDifficulty);
         normal?.addEventListener('click', setDifficulty);
         hard?.addEventListener('click', setDifficulty);
+    } */
+    //establecer dificultad del simon dice
+    public setDifficulty = (e: any) => {
+        this.difficulty = parseInt(e.target.id);
     }
+
     //retorna array d n posiciones, con números del 0 al 3 random
     public obtainCombination(n: number) {
         for (let index = 0; index < n; index++) {
@@ -51,10 +55,20 @@ export class IndexModel {
         }
         return this.simonPattern;
     }
+    /*
+    modal del nombre abierto: this.view
+    evento en el botón de enviar: this.view
+    guardar en la lista de ganadores: this.controller {this.modelo}
+    mostrar la tabla: vista
+
+    vista
+    public mostrartabla(array de ){
+        limpiar y generar
+    }
+    */
 
     public sendDataBase() {
         const modalName: any = document.getElementById('askname');
-        const input: any = document.getElementById('userName');
         const buttonSend = document.getElementById('sendName');
         let usertable = document.getElementById('userstable')!;
         buttonSend?.addEventListener('click', (e) => {
@@ -65,7 +79,6 @@ export class IndexModel {
                 console.log(this._winners.length);
                 let usertable = document.getElementById('userstable')!;
                 let tabla = document.getElementById('top-table');
-                var rowCount = document.getElementsByClassName('top-table')!.length;
                 console.log(this.winners);
             }
             usertable.insertAdjacentHTML('beforebegin', `<tr id="tableex"><td>ccc</td><td>bbb</td><td>xxx</td></tr>`);

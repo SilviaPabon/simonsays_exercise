@@ -1,7 +1,7 @@
 export class IndexView {
     constructor() {
-        //todo
-        this._initiate = false;
+        this.getElement = (selector) => document.querySelector(selector);
+        this._display = this.getElement('.container');
         this.g = document.getElementById('0');
         this.gs = document.querySelector('.z');
         this.r = document.getElementById('1');
@@ -10,20 +10,22 @@ export class IndexView {
         this.ys = document.querySelector('.t');
         this.b = document.getElementById('3');
         this.bs = document.querySelector('.tr');
-        this.getElement = (selector) => document.querySelector(selector);
-        this._display = this.getElement('.container');
+        this._btn = document.getElementById('btn-start');
+        this.simontitle = document.getElementById('simon');
+        this.usertitle = document.getElementById('human');
+        this.modalDif = document.getElementById('modaldif');
+        this.btnEasy = document.getElementById('700');
+        this.btnNormal = document.getElementById('500');
+        this.btnHard = document.getElementById('100');
+        this.btnModalStart = document.getElementById('start');
+        this.modalname = document.getElementById('askname');
+        this.btnModalName = document.getElementById('sendName');
     }
     set display(display) {
         this._display = display;
     }
     get display() {
         return this._display;
-    }
-    set initiate(initiate) {
-        this._initiate = initiate;
-    }
-    get initiate() {
-        return this._initiate;
     }
     //va pintando o iluminando los botones luego de start()
     pintar(orden, level) {
@@ -56,18 +58,59 @@ export class IndexView {
             }, level);
         }
     }
-    //todo
+    //todo cambiar el tiempo
     generaColores(simonColors, level) {
         simonColors.forEach((c, i) => {
             //cambio cada segundo
-            setTimeout(() => { this.pintar(c, level); }, (i + 1) * 500);
+            setTimeout(() => {
+                this.pintar(c, level);
+            }, (i + 1) * 500);
         });
     }
+    //todo
     //despliega modal al final
-    modalName() {
-        const modalName = document.getElementById('askname');
-        const input = document.getElementById('userName');
-        const buttonSend = document.getElementById('sendName');
+    /* public modalName() {
+        const modalName: any = document.getElementById('askname');
         modalName.showModal();
+    } */
+    //para clicar en el start principal y seleccionar la dificultad
+    listenStart(handler) {
+        this._btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.modalDif.showModal();
+            //aquí se establece la dificultad con los botones del modal
+            this.btnEasy.addEventListener('click', handler);
+            this.btnNormal.addEventListener('click', handler);
+            this.btnHard.addEventListener('click', handler);
+        });
+    }
+    //después de seleccionar la dificultad se cierra el modal y se llama el turno de simón
+    listenStartGame(handle) {
+        this.btnModalStart.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.modalDif.close();
+            handle();
+        });
+    }
+    //visibilidad de títulos
+    visibleTitle(which, type) {
+        document.getElementById(which).style.visibility = type;
+    }
+    //listeners para la respuesta del usuario, recibe la función this.userinput del controller
+    listenPattern(handler) {
+        this.g.addEventListener('click', handler);
+        this.r.addEventListener('click', handler);
+        this.y.addEventListener('click', handler);
+        this.b.addEventListener('click', handler);
+    }
+    buttonSendGameOver(handler) {
+        const input = document.getElementById('userName');
+        console.log("before");
+        this.btnModalName.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handler(input.value);
+            //location.reload();
+        });
     }
 }

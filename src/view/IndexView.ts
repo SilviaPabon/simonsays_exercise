@@ -160,14 +160,11 @@ export class IndexView {
             if (this.userName) {
                 handler(this.userName);
                 this.input.value = '';
-                this.prueba();
             }
+            this.visibleTitle('form', 'hidden');
         })
 
 
     }
 
-    public prueba = () => {
-        this.modalname.close();
-    }
 }

@@ -1,9 +1,6 @@
 export class IndexView {
     constructor() {
         this.getElement = (selector) => document.querySelector(selector);
-        this.prueba = () => {
-            this.modalname.close();
-        };
         this._display = this.getElement('.container');
         this.g = document.getElementById('0');
         this.gs = document.querySelector('.z');
@@ -123,8 +120,8 @@ export class IndexView {
             if (this.userName) {
                 handler(this.userName);
                 this.input.value = '';
-                this.prueba();
             }
+            this.visibleTitle('form', 'hidden');
         });
     }
 }

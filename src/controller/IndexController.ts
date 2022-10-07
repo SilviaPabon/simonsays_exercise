@@ -29,6 +29,7 @@ export class IndexController {
     //inicialización del juego
     public begin() {
         //start button - modal dificulty
+        this.view.visibleTitle('form', 'hidden');
         this.view.listenStart(this.model.setDifficulty);
         this.view.listenStartGame(this.simonTurn);
         //this.view.modalDif.close();
@@ -53,7 +54,7 @@ export class IndexController {
         if (this.model.userPattern[(turn-1)] !== this.model.simonPattern[(turn-1)]){
             console.log("Game Over");
             this.view.visibleTitle('human', 'hidden');
-            this.view.modalname.showModal();
+            this.view.visibleTitle('form', 'visible');
             this.view.buttonSendGameOver(this.handleSend);
             this.restartSimonSay();
             return true;
@@ -82,6 +83,5 @@ export class IndexController {
         this.model.round = 1;
         this.model.simonPattern = [];
         this.model.userPattern = [];
-
     }
 }

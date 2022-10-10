@@ -47,7 +47,7 @@ export class IndexView {
 
         this.modalDif = document.getElementById('modaldif');
         this.btnEasy = document.getElementById('700');
-        this.btnNormal = document.getElementById('500');
+        this.btnNormal = document.getElementById('600');
         this.btnHard = document.getElementById('100');
         this.btnModalStart = document.getElementById('start');
 
@@ -154,7 +154,6 @@ export class IndexView {
     public buttonSendGameOver(handler: Function) {
         this.form.addEventListener('submit', (e: any) => {
             e.preventDefault()
-            console.log(this.userName);
             if (this.userName) {
                 handler(this.userName);
                 this.input.value = '';
@@ -165,10 +164,18 @@ export class IndexView {
 
     public showTable(list: any){
         let usertable = document.getElementById('userstable')!;
+        let listilla = JSON.parse(localStorage['winners']!);
+        let body = document.querySelector('tbody');
         if (list.length < 10) {
             console.log(list.length);
         }
-        list.forEach((user: player) => usertable.insertAdjacentHTML('beforebegin', `<tr><td>${user.name_player}</td><td>${user.point_player}</td><td>${user.level}</td></tr>`));
+        while(body!.firstChild != usertable){
+            body!.removeChild(body!.firstChild!);
+        }
+        console.log(JSON.parse(localStorage['winners']!));
+        listilla.forEach((user: player) =>
+            usertable.insertAdjacentHTML('beforebegin',
+        `<tr><td>${user.name_player}</td><td>${user.point_player}</td><td>${user.level}</td></tr>`));
     }
 
 }

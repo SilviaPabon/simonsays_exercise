@@ -78,7 +78,7 @@ export class IndexController {
             case 700:
                 difficulty = 'Easy';
                 break;
-            case 500:
+            case 600:
                 difficulty = 'Normal';
                 break;
             case 100:
@@ -88,9 +88,8 @@ export class IndexController {
                 break;
         }
         this.model.winners.push({name_player: player, point_player: this.model.round, level: difficulty})
-        //console.log(this.model.winners, "prueba");
         localStorage.setItem('winners', JSON.stringify(this.model.winners));
-        let prueba = JSON.parse(localStorage.getItem(('winners')));
+        let prueba = JSON.parse(localStorage.getItem(('winners'))!);
 
         this.view.showTable(prueba);
     }

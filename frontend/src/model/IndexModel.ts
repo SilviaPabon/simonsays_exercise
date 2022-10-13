@@ -6,7 +6,8 @@ export class IndexModel {
     public userPattern: number[] = [];
 
     public round: number = 1;
-    public difficulty: number = 500;
+    public roundReal: number = 1;
+    public difficulty: number = 600;
 
 
     constructor() {
@@ -66,4 +67,23 @@ export class IndexModel {
         limpiar y generar
     }
     */
+
+    public orderWinners(){
+        this._winners.sort((a, b) => (b.point_player) - (a.point_player));
+        console.log(this._winners);
+    }
+
+    public getWinners(id: number, fn: Function): void {
+        //this.http(`${this.url}people/${id}`, 'get', fn);
+    }
+
+    public postWinners(): void {
+        //this.http(`${this.url}people/${id}`, 'get', fn);
+    }
+
+    public http = async (url: string, method: string, fn: Function) => {
+        const response = await fetch(url, {method: method});
+        const data = await response.json();
+        fn(data);
+    }
 }

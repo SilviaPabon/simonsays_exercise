@@ -21,6 +21,7 @@ export class IndexController {
                 console.log("Game Over");
                 this.view.visibleTitle('human', 'hidden');
                 this.view.visibleTitle('form', 'visible');
+                this.model.roundReal = (this.model.round) - 1;
                 this.view.buttonSendGameOver(this.handleSend);
                 this.restartSimonSay();
                 return true;
@@ -53,10 +54,13 @@ export class IndexController {
                 default:
                     break;
             }
-            this.model.winners.push({ name_player: player, point_player: this.model.round, level: difficulty });
+            this.model.winners.push({ name_player: player, point_player: this.model.roundReal, level: difficulty });
             localStorage.setItem('winners', JSON.stringify(this.model.winners));
             let prueba = JSON.parse(localStorage.getItem(('winners')));
-            this.view.showTable(prueba);
+            this.model.orderWinners();
+            this.view.showTable(localStorage);
+            //to help this.model.round
+            this.model.roundReal = 1;
         };
         this.model = model;
         this.view = view;
@@ -81,6 +85,7 @@ export class IndexController {
         this.view.visibleTitle('form', 'hidden');
         this.view.listenStart(this.model.setDifficulty);
         this.view.listenStartGame(this.simonTurn);
+        this.view.showTable(localStorage);
         //this.view.modalDif.close();
         //this.simonTurn();
     }

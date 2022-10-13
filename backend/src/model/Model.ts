@@ -1,12 +1,24 @@
 import winners from "../db/winners.json";
-//import { IPeople } from "interface/IPeople";
+import { IPlayers } from "interface/IPlayers";
 import fs from "fs";
 import path from "path";
-
 export class Model {
 
     constructor() {
       // TODO document why this constructor is empty
+    }
+
+    public insertWinners = (people: IPlayers): boolean => {
+        console.log(path.join(__dirname, 'db'));
+        let data = fs.readFileSync('dist/db/winners.json', 'utf8');
+        let peopleData: IPlayers[] = JSON.parse(data);
+        peopleData.push(people);
+        data = JSON.stringify(peopleData);
+        fs.writeFile('dist/db/winners.json', data, (err) => {
+            if (err) throw err;
+            return false;
+        });
+        return true;
     }
 
 /*     public getPeopleByID = (id: number) => peoples[--id];

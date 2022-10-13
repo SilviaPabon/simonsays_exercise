@@ -11,6 +11,11 @@ export class Controller {
 
     public index = (req: Request, res: Response) => res.json({ 'error': 0, 'msg': 'API: node-express-ts' });
 
+    public insertWinners = (req: Request, res: Response) => {
+        this.model.insertWinners(req.body);
+        return res.json({ 'error': 0, 'msg': 'API: insert' });
+    }
+
     /* public getPeople = (req: Request, res: Response) => {
         const { id } = req.params;
         const people = this.model.getPeopleByID(parseInt(id));

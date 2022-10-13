@@ -15,7 +15,7 @@ class BackendRoute {
     public config = (): void => {
         this.router.get('/', this.Controller.index);
         //this.router.get('/people/:id', this.Controller);
-        //this.router.post('/people/', this.Controller);
+        this.router.post('/winners', this.Controller.insertWinners);
     }
 
 }

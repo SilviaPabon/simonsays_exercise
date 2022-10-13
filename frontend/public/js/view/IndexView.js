@@ -1,6 +1,21 @@
 export class IndexView {
     constructor() {
         this.getElement = (selector) => document.querySelector(selector);
+        this.showTable = (list) => {
+            console.log(list);
+            let usertable = document.getElementById('userstable');
+            //let listilla = JSON.parse(localStorage['winners']!);
+            let body = document.querySelector('tbody');
+            if (list.length < 10) {
+                console.log(list.length);
+            }
+            while (body.firstChild != usertable) {
+                body.removeChild(body.firstChild);
+            }
+            console.log(list);
+            //console.log(JSON.parse(localStorage['winners']!));
+            list.forEach((user) => usertable.insertAdjacentHTML('beforebegin', `<tr><td>${user.name_player}</td><td>${user.point_player}</td><td>${user.level}</td></tr>`));
+        };
         this._display = this.getElement('.container');
         this.g = document.getElementById('0');
         this.gs = document.querySelector('.z');
@@ -120,18 +135,5 @@ export class IndexView {
             }
             this.visibleTitle('form', 'hidden');
         });
-    }
-    showTable(list) {
-        let usertable = document.getElementById('userstable');
-        let listilla = JSON.parse(localStorage['winners']);
-        let body = document.querySelector('tbody');
-        if (list.length < 10) {
-            console.log(list.length);
-        }
-        while (body.firstChild != usertable) {
-            body.removeChild(body.firstChild);
-        }
-        console.log(JSON.parse(localStorage['winners']));
-        listilla.forEach((user) => usertable.insertAdjacentHTML('beforebegin', `<tr><td>${user.name_player}</td><td>${user.point_player}</td><td>${user.level}</td></tr>`));
     }
 }

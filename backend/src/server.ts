@@ -21,7 +21,7 @@ class Server {
     }
 
     public route = (): void => {
-        this.backend.use('/api', this.Route.router);
+        this.backend.use('/simonsay', this.Route.router);
     }
 
     public start = (): void => {

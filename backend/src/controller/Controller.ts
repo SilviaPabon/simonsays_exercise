@@ -16,6 +16,14 @@ export class Controller {
         return res.json({ 'error': 0, 'msg': 'API: insert' });
     }
 
+    public getPeople = (req: Request, res: Response) => {
+        const people = this.model.getWinners();
+        if (people) {
+            return res.send(people);
+        }
+        return res.json({ 'error': 1, 'msg': 'API: id no found' });
+    }
+
     /* public getPeople = (req: Request, res: Response) => {
         const { id } = req.params;
         const people = this.model.getPeopleByID(parseInt(id));

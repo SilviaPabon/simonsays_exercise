@@ -73,17 +73,24 @@ export class IndexModel {
         console.log(this._winners);
     }
 
-    public getWinners(id: number, fn: Function): void {
-        //this.http(`${this.url}people/${id}`, 'get', fn);
+    public getWinners(fn: Function): void {
+        this.http('http://127.0.0.1:1802/simonsay/winners', 'get', fn);
     }
 
-    public postWinners(): void {
-        //this.http(`${this.url}people/${id}`, 'get', fn);
+    public postWinners(list: any): void {
+        this.http_('http://127.0.0.1:1802/simonsay/winners', 'post', list);
     }
 
     public http = async (url: string, method: string, fn: Function) => {
         const response = await fetch(url, {method: method});
         const data = await response.json();
         fn(data);
+    }
+
+    public http_ = async (url: string, method: string, fn: any) => {
+        console.log(fn, "2");
+        const response = await fetch(url, {method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({"data": fn}) });
+        const data = await response.json();
+        console.log(data);
     }
 }

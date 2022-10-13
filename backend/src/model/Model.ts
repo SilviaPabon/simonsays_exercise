@@ -12,7 +12,8 @@ export class Model {
         console.log(path.join(__dirname, 'db'));
         let data = fs.readFileSync('dist/db/winners.json', 'utf8');
         let peopleData: IPlayers[] = JSON.parse(data);
-        peopleData.push(people);
+        console.log(peopleData, "peopleData1");
+        peopleData.push(people['data'][0]);
         data = JSON.stringify(peopleData);
         fs.writeFile('dist/db/winners.json', data, (err) => {
             if (err) throw err;
@@ -20,6 +21,10 @@ export class Model {
         });
         return true;
     }
+
+    public getWinners = () => {
+        return winners;
+    };
 
 /*     public getPeopleByID = (id: number) => peoples[--id];
 

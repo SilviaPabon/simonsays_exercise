@@ -47,6 +47,12 @@ export class IndexModel {
             const data = yield response.json();
             fn(data);
         });
+        this.http_ = (url, method, fn) => __awaiter(this, void 0, void 0, function* () {
+            console.log(fn, "2");
+            const response = yield fetch(url, { method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ "data": fn }) });
+            const data = yield response.json();
+            console.log(data);
+        });
         this._winners;
     }
     get winners() {
@@ -78,10 +84,10 @@ export class IndexModel {
         this._winners.sort((a, b) => (b.point_player) - (a.point_player));
         console.log(this._winners);
     }
-    getWinners(id, fn) {
-        //this.http(`${this.url}people/${id}`, 'get', fn);
+    getWinners(fn) {
+        this.http('http://127.0.0.1:1802/simonsay/winners', 'get', fn);
     }
-    postWinners() {
-        //this.http(`${this.url}people/${id}`, 'get', fn);
+    postWinners(list) {
+        this.http_('http://127.0.0.1:1802/simonsay/winners', 'post', list);
     }
 }

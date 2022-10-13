@@ -13,6 +13,7 @@ export class IndexController {
 
         this.begin();
         this.view.listenPattern(this.userInput);
+        this.model.getWinners(this.view.showTable);
     }
     //inicializa el juego, llamando a que Simón diga su patrón
     /* public begin() {
@@ -32,7 +33,7 @@ export class IndexController {
         this.view.visibleTitle('form', 'hidden');
         this.view.listenStart(this.model.setDifficulty);
         this.view.listenStartGame(this.simonTurn);
-        this.view.showTable(localStorage);
+        //this.view.showTable(localStorage);
         //this.view.modalDif.close();
         //this.simonTurn();
     }
@@ -90,10 +91,11 @@ export class IndexController {
                 break;
         }
         this.model.winners.push({name_player: player, point_player: this.model.roundReal, level: difficulty})
-        localStorage.setItem('winners', JSON.stringify(this.model.winners));
+        this.model.postWinners(this.model.winners)
+        /* localStorage.setItem('winners', JSON.stringify(this.model.winners));
         let prueba = JSON.parse(localStorage.getItem(('winners'))!);
-        this.model.orderWinners();
-        this.view.showTable(localStorage);
+        this.model.orderWinners(); */
+        this.model.getWinners(this.view.showTable)
         //to help this.model.round
         this.model.roundReal = 1;
     }

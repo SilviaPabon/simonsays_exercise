@@ -69,18 +69,6 @@ export class IndexController {
         this.view.listenPattern(this.userInput);
         this.model.getWinners(this.view.showTable);
     }
-    //inicializa el juego, llamando a que Simón diga su patrón
-    /* public begin() {
-        const startbtn = document.getElementById('start');
-        const modalDif: any = document.getElementById('modaldif');
-        this.model.startButton();
-        startbtn?.addEventListener('click', () => {
-            modalDif.close();
-            this.simonTurn();
-            console.log("click start");
-        });
-
-    } */
     //inicialización del juego
     begin() {
         //start button - modal dificulty

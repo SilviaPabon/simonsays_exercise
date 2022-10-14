@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "concurrently \"tsc -w\" \"nodemon -i dist/db/winners.json dist/server.js\""
+    "test": "concurrently \"tsc -w\" \"nodemon -i db/ dist/server.js\""
   },
   "keywords": [],
   "author": "",

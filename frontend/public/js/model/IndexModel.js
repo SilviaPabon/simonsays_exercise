@@ -15,29 +15,6 @@ export class IndexModel {
         this.round = 1;
         this.roundReal = 1;
         this.difficulty = 600;
-        //todo
-        /* public startButton(){
-            const _btn = document.getElementById('btn-start');
-            const modalDif: any = document.getElementById('modaldif');
-            _btn?.addEventListener('click', (e) => {
-                e.preventDefault();
-                modalDif.showModal();
-                this.setDifficulty();
-            });
-        } */
-        //todo
-        /* public setDifficulty(){
-            const easy = document.getElementById('700');
-            const normal = document.getElementById('500');
-            const hard = document.getElementById('100');
-    
-            const setDifficulty = (e: any) => {
-                this.difficulty = parseInt(e.target.id);
-            }
-            easy?.addEventListener('click', setDifficulty);
-            normal?.addEventListener('click', setDifficulty);
-            hard?.addEventListener('click', setDifficulty);
-        } */
         //establecer dificultad del simon dice
         this.setDifficulty = (e) => {
             this.difficulty = parseInt(e.target.id);
@@ -45,6 +22,7 @@ export class IndexModel {
         this.http = (url, method, fn) => __awaiter(this, void 0, void 0, function* () {
             const response = yield fetch(url, { method: method });
             const data = yield response.json();
+            console.log(data);
             fn(data);
         });
         this.http_ = (url, method, fn) => __awaiter(this, void 0, void 0, function* () {
@@ -69,17 +47,6 @@ export class IndexModel {
         }
         return this.simonPattern;
     }
-    /*
-    modal del nombre abierto: this.view
-    evento en el botón de enviar: this.view
-    guardar en la lista de ganadores: this.controller {this.modelo}
-    mostrar la tabla: vista
-
-    vista
-    public mostrartabla(array de ){
-        limpiar y generar
-    }
-    */
     orderWinners() {
         this._winners.sort((a, b) => (b.point_player) - (a.point_player));
         console.log(this._winners);

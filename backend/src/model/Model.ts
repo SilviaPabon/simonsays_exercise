@@ -31,7 +31,9 @@ export class Model {
     }
 
     public getWinners = () => {
-        //return winners;
+        let data = fs.readFileSync(path.join(__dirname,'../../db/winners.json'), 'utf8');
+        console.log(data, "print data");
+        return data;
     };
 
 }

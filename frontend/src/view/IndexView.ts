@@ -163,7 +163,7 @@ export class IndexView {
     }
 
     public showTable = (list: any) => {
-        console.log(list);
+        console.log(list, "list");
         let usertable = document.getElementById('userstable')!;
         //let listilla = JSON.parse(localStorage['winners']!);
         let body = document.querySelector('tbody');

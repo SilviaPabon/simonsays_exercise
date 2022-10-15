@@ -37,7 +37,6 @@ export class IndexModel {
 
     public orderWinners(){
         this._winners.sort((a, b) => (b.point_player) - (a.point_player));
-        console.log(this._winners);
     }
 
     public getWinners(fn: Function): void {
@@ -51,14 +50,11 @@ export class IndexModel {
     public http = async (url: string, method: string, fn: Function) => {
         const response = await fetch(url, {method: method});
         const data = await response.json();
-        console.log(data);
         fn(data);
     }
 
     public http_ = async (url: string, method: string, fn: any) => {
-        console.log(fn, "2");
         const response = await fetch(url, {method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({"data": fn}) });
         const data = await response.json();
-        console.log(data);
     }
 }

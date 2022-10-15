@@ -9,16 +9,17 @@ export class Model {
     }
 
     public insertWinners = (people: IPlayers): boolean => {
-        console.log(path.join(__dirname,'../../db/winners.json'));
-        console.log(people, "people");
+
         try {
             let data = fs.readFileSync(path.join(__dirname,'../../db/winners.json'), 'utf8');
-            console.log(data, "data");
+
             let peopleData: IPlayers[] = JSON.parse(data);
-            console.log(people, "people");
-            console.log(peopleData, "peopleData1");
+
             peopleData.push(people['data'][0]);
-            data = JSON.stringify(peopleData);
+            this.orderWinners(peopleData);
+
+            data = JSON.stringify(peopleData.slice(0, 10));
+
             fs.writeFile(path.join(__dirname,'../../db/winners.json'), data, (err) => {
                 if (err) throw err;
                 return false;
@@ -32,8 +33,11 @@ export class Model {
 
     public getWinners = () => {
         let data = fs.readFileSync(path.join(__dirname,'../../db/winners.json'), 'utf8');
-        console.log(data, "print data");
         return data;
     };
+
+    public orderWinners(array: IPlayers[]){
+        array.sort((a, b) => (b.point_player) - (a.point_player));
+    }
 
 }

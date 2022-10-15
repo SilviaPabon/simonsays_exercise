@@ -80,6 +80,7 @@ export class IndexController {
         //this.simonTurn();
     }
     restartSimonSay() {
+        //this.model.getWinners(this.view.showTable);
         this.model.round = 1;
         this.model.simonPattern = [];
         this.model.userPattern = [];

@@ -22,14 +22,11 @@ export class IndexModel {
         this.http = (url, method, fn) => __awaiter(this, void 0, void 0, function* () {
             const response = yield fetch(url, { method: method });
             const data = yield response.json();
-            console.log(data);
             fn(data);
         });
         this.http_ = (url, method, fn) => __awaiter(this, void 0, void 0, function* () {
-            console.log(fn, "2");
             const response = yield fetch(url, { method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ "data": fn }) });
             const data = yield response.json();
-            console.log(data);
         });
         this._winners;
     }
@@ -49,7 +46,6 @@ export class IndexModel {
     }
     orderWinners() {
         this._winners.sort((a, b) => (b.point_player) - (a.point_player));
-        console.log(this._winners);
     }
     getWinners(fn) {
         this.http('http://127.0.0.1:1802/simonsay/winners', 'get', fn);

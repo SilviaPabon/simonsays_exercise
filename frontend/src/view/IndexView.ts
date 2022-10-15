@@ -163,9 +163,8 @@ export class IndexView {
     }
 
     public showTable = (list: any) => {
-        console.log(list, "list");
         let usertable = document.getElementById('userstable')!;
-        //let listilla = JSON.parse(localStorage['winners']!);
+
         let body = document.querySelector('tbody');
         if (list.length < 10) {
             console.log(list.length);
@@ -173,8 +172,7 @@ export class IndexView {
         while(body!.firstChild != usertable){
             body!.removeChild(body!.firstChild!);
         }
-        console.log(list);
-        //console.log(JSON.parse(localStorage['winners']!));
+
         list.forEach((user: player) =>
             usertable.insertAdjacentHTML('beforebegin',
         `<tr><td>${user.name_player}</td><td>${user.point_player}</td><td>${user.level}</td></tr>`));

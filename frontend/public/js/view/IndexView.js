@@ -1,12 +1,11 @@
 export class IndexView {
     constructor() {
         this.getElement = (selector) => document.querySelector(selector);
+        //muestra los datos provenientes de la bd
         this.showTable = (list) => {
             let usertable = document.getElementById('userstable');
             let body = document.querySelector('tbody');
-            if (list.length < 10) {
-                console.log(list.length);
-            }
+            //borra la tabla para facilitar su actualización
             while (body.firstChild != usertable) {
                 body.removeChild(body.firstChild);
             }
@@ -77,7 +76,7 @@ export class IndexView {
             }, level);
         }
     }
-    //todo cambiar el tiempo
+    //recibe los colores, los recorre y los pinta
     generaColores(simonColors, level) {
         simonColors.forEach((c, i) => {
             //cambio cada segundo
@@ -86,12 +85,6 @@ export class IndexView {
             }, (i + 1) * 500);
         });
     }
-    //todo
-    //despliega modal al final
-    /* public modalName() {
-        const modalName: any = document.getElementById('askname');
-        modalName.showModal();
-    } */
     //para clicar en el start principal y seleccionar la dificultad
     listenStart(handler) {
         this._btn.addEventListener('click', (e) => {
@@ -122,6 +115,7 @@ export class IndexView {
         this.y.addEventListener('click', handler);
         this.b.addEventListener('click', handler);
     }
+    //cuando la persona da enivar su nombre, hace un llamado a una función que va a actualizar los datos
     buttonSendGameOver(handler) {
         this.form.addEventListener('submit', (e) => {
             e.preventDefault();

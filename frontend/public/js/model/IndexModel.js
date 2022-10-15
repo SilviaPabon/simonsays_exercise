@@ -19,14 +19,15 @@ export class IndexModel {
         this.setDifficulty = (e) => {
             this.difficulty = parseInt(e.target.id);
         };
-        this.http = (url, method, fn) => __awaiter(this, void 0, void 0, function* () {
+        //fetch to get
+        this.httpGet = (url, method, fn) => __awaiter(this, void 0, void 0, function* () {
             const response = yield fetch(url, { method: method });
             const data = yield response.json();
             fn(data);
         });
-        this.http_ = (url, method, fn) => __awaiter(this, void 0, void 0, function* () {
-            const response = yield fetch(url, { method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ "data": fn }) });
-            const data = yield response.json();
+        //fetch to post
+        this.httpPost = (url, method, playerData) => __awaiter(this, void 0, void 0, function* () {
+            yield fetch(url, { method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ "data": playerData }) });
         });
         this._winners;
     }
@@ -44,13 +45,12 @@ export class IndexModel {
         }
         return this.simonPattern;
     }
-    orderWinners() {
-        this._winners.sort((a, b) => (b.point_player) - (a.point_player));
-    }
+    //needs method httpGet
     getWinners(fn) {
-        this.http('http://127.0.0.1:1802/simonsay/winners', 'get', fn);
+        this.httpGet('http://127.0.0.1:1802/simonsay/winners', 'get', fn);
     }
-    postWinners(list) {
-        this.http_('http://127.0.0.1:1802/simonsay/winners', 'post', list);
+    //needs method httpPost
+    postWinners(data) {
+        this.httpPost('http://127.0.0.1:1802/simonsay/winners', 'post', data);
     }
 }

@@ -1,3 +1,4 @@
+
 export class IndexModel {
 
     private _winners:  Array<player> = [];
@@ -34,27 +35,22 @@ export class IndexModel {
         }
         return this.simonPattern;
     }
-
-    public orderWinners(){
-        this._winners.sort((a, b) => (b.point_player) - (a.point_player));
-    }
-
+    //needs method httpGet
     public getWinners(fn: Function): void {
-        this.http('http://127.0.0.1:1802/simonsay/winners', 'get', fn);
+        this.httpGet('http://127.0.0.1:1802/simonsay/winners', 'get', fn);
     }
-
-    public postWinners(list: any): void {
-        this.http_('http://127.0.0.1:1802/simonsay/winners', 'post', list);
+    //needs method httpPost
+    public postWinners(data: player[]): void {
+        this.httpPost('http://127.0.0.1:1802/simonsay/winners', 'post', data);
     }
-
-    public http = async (url: string, method: string, fn: Function) => {
+    //fetch to get
+    public httpGet = async (url: string, method: string, fn: Function) => {
         const response = await fetch(url, {method: method});
         const data = await response.json();
         fn(data);
     }
-
-    public http_ = async (url: string, method: string, fn: any) => {
-        const response = await fetch(url, {method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({"data": fn}) });
-        const data = await response.json();
+    //fetch to post
+    public httpPost = async (url: string, method: string, playerData: any) => {
+        await fetch(url, {method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({"data": playerData}) });
     }
 }

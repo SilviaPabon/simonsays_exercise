@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/app.css">
+    <title>Simon Says</title>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <h1 class="text-center">Simon Says</h1>
+        <h4 id="human" class="turn text-center">Your turn</h4>
+        <h4 id="simon" class="turn text-center">Simon turn</h4>
+        <div class="flex-container">
+            <div id="0" class="sbtn green" value="0">G</div>
+            <audio class="z" src="./music/1.mp3" ></audio>
+            <div id="1" class="sbtn red" value="1">R</div>
+            <audio class="u" src="./music/2.mp3" ></audio>
+        </div>
+        <div class="flex-container">
+            <div id="2" class="sbtn yellow" value="2">Y</div>
+            <audio class="t" src="./music/3.mp3" ></audio>
+            <div id="3" class="sbtn blue" value="3">B</div>
+            <audio class="tr" src="./music/4.mp3" ></audio>
+        </div>
+        <dialog id="modaldif">
+            <h2>First things first, chose the level</h2>
+            <div>
+                <button id="700" type="reset">Easy</button>
+                <button id="600" type="reset">Normal</button>
+                <button id="100" type="reset">Hard</button>
+            </div>
+            <p>Now, you can START</p>
+            <button id="start" type="reset">START</button>
+        </dialog>
+        <form id="form" method="submit">
+            <h2>:( You Lost! Tell me yor name:</h2>
+            <input type="text" name="userName" id="userName">
+            <button id="sendName" type="submit">Send Name</button>
+        </form>
+        <div class="flex-container">
+            <div class="text-center">
+                <a id="btn-start" href="" class="btn">Start</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container-2">
+        <center>
+            <table class="top-table" id="top-table">
+                <thead>
+                  <tr>
+                    <td>
+                      <b>Name</b>
+                    </td>
+                    <td>
+                      <b>Points</b>
+                    </td>
+                    <td>
+                        <b>Level</b>
+                    </td>
+                  </tr>
+                </thead>
+                <tr id="userstable"></tr>
+            </table>
+        </center>
+    </div>
+    <script src="./js/index.js" type="module"></script>
+</body>
+
+</html>
